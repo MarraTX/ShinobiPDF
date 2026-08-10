@@ -2,7 +2,7 @@
 
 Una herramienta de escritorio moderna, rápida y portátil para dividir documentos PDF en capítulos o rangos de páginas específicos. Diseñada con una estética oscura (*Dark Mode*) y enfocada en ofrecer la mejor experiencia de usuario.
 
-## ✨ Características Principales
+##  Características Principales
 
 *   **Visor PDF Integrado en Tiempo Real:** Previsualiza el documento completo directamente en la aplicación sin necesidad de programas externos (potenciado por `PyMuPDF`).
 *   **División por Capítulos:** Permite definir múltiples segmentos (ej. *Introducción*, *Capítulo 1*, *Conclusión*) especificando la página de inicio y fin para cada uno.
@@ -11,14 +11,14 @@ Una herramienta de escritorio moderna, rápida y portátil para dividir document
 *   **Atajos de Teclado:** Navegación rápida de páginas en el visor usando las flechas del teclado (◀ y ▶).
 *   **Procesamiento Asíncrono:** La interfaz gráfica nunca se congela, permitiéndote ver el progreso de corte en tiempo real.
 
-## 🚀 Descarga y Uso (Para Usuarios Finales)
+##  Descarga y Uso (Para Usuarios Finales)
 
 Si solo quieres usar la aplicación para dividir tus PDFs, no necesitas conocimientos de programación.
 1. Ve a la sección de **[Releases](../../releases)** a la derecha de esta página.
 2. Descarga el archivo `PDF_Splitter_Pro_Windows.zip` de la última versión.
 3. Descomprime el archivo en tu computadora y haz doble clic en `PDF Splitter Pro.exe`.
 
-## 💻 Instalación Local (Para Desarrolladores)
+##  Instalación Local (Para Desarrolladores)
 
 Si deseas modificar el código o contribuir al proyecto, estos son los pasos para ejecutar el entorno de desarrollo:
 
