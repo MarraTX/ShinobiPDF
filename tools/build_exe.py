@@ -95,6 +95,10 @@ def main():
     carpeta = os.path.join(dist, EXE_NAME)
     borrar_con_reintentos(carpeta)
     shutil.copytree(os.path.join(dist_temporal, EXE_NAME), carpeta)
+    # La AGPL exige distribuir el texto de la licencia junto al programa (portable e instalador)
+    licencia = os.path.join(RAIZ, "LICENSE")
+    if os.path.exists(licencia):
+        shutil.copyfile(licencia, os.path.join(carpeta, "LICENSE.txt"))
     print(f"\nEjecutable listo: {os.path.join(carpeta, EXE_NAME + '.exe')}")
 
     if "--zip" in sys.argv:
