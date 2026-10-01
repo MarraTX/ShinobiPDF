@@ -1,0 +1,6 @@
+customtkinter>=5.2
+pypdf>=5.0
+PyMuPDF>=1.23
+Pillow>=10.0
+tkinterdnd2>=0.4
+cryptography>=42
