@@ -10,6 +10,9 @@ from .theme import C, font
 from .widgets import Dialog, button, center_on_parent, label, make_modal, segmented
 
 # Librerías incluidas en la app y sus licencias (la AGPL exige mostrar los avisos de terceros)
+# Código secreto de PDF Ninja (el minijuego de shinobipdf.com): desbloquea una katana exclusiva
+NINJA_CODE = "DIVIDIYVENCERAS"
+
 CREDITOS = [
     ("CustomTkinter", "MIT"),
     ("PyMuPDF / MuPDF", "AGPL-3.0"),
@@ -160,6 +163,8 @@ class AboutDialog(_Ventana):
         label(body, t("settings_version", name=APP_NAME, version=APP_VERSION), 12, color="muted", anchor="w").pack(fill="x", pady=(2, 10))
         label(body, t("about_tagline"), 13, anchor="w", justify="left", wraplength=380).pack(fill="x")
         label(body, t("about_license"), 12, color="muted", anchor="w", justify="left", wraplength=380).pack(fill="x", pady=(8, 12))
+        # Easter egg: el código de la katana exclusiva del minijuego de la web
+        label(body, t("about_ninja_code", code=NINJA_CODE), 12, color="muted", anchor="w", justify="left", wraplength=380).pack(fill="x", pady=(0, 12))
 
         enlaces = ctk.CTkFrame(body, fg_color="transparent")
         enlaces.pack(fill="x", pady=(0, 16))
