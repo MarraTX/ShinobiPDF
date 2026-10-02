@@ -656,21 +656,22 @@ def escena_merge(salida, idioma, docs, appdata, grabar):
         ruta = os.path.join(docs, nombre)
         crear_simple(ruta, os.path.splitext(nombre)[0], color)
         extras.append(ruta)
+    extras.append(os.path.join(docs, tx["facturas"]))
     app = nueva_app(idioma, "dark", appdata)
     mv = app.views["merge"]
     e = Escena(app, salida, f"merge-{idioma}", grabar)
+    # Sin zoom: la lista ocupa todo el ancho y cualquier acercamiento corta las flechas de la derecha
     e.paso(600, lambda: app.show_view("merge"))
-    e.zoom(1.45, foco=lambda: e.centro(mv.files, dy=-mv.files.winfo_height() * 0.3), espera_ms=200)
     for ruta in extras:
-        e.paso(650, lambda r=ruta: mv.files.add_files([r]))
-    e.paso(400)
+        e.paso(600, lambda r=ruta: mv.files.add_files([r]))
+    e.paso(500)
     e.mover(lambda: e.centro(mv.files.items[-1]["frame"], dx=mv.files.items[-1]["frame"].winfo_width() / 2 - 100), 700)
-    e.zoom(1.8, espera_ms=100)
-    e.clic(lambda: mv.files.move(mv.files.items[-1], -1), 900)
-    e.zoom(1.0, espera_ms=300)
+    e.clic(lambda: mv.files.move(mv.files.items[-1], -1), 700)
+    # El archivo subió una fila: el cursor lo acompaña antes de volver a subirlo
+    e.mover(lambda: e.centro(mv.files.items[-2]["frame"], dx=mv.files.items[-2]["frame"].winfo_width() / 2 - 100), 500, 0.35)
+    e.clic(lambda: mv.files.move(mv.files.items[-2], -1), 900)
     e.captura(f"merge-{idioma}", 200)
     e.mover(mv.merge_btn, 900)
-    e.zoom(1.5, espera_ms=100)
     e.paso(1300)
     e.correr()
 
