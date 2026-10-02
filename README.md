@@ -1,103 +1,74 @@
 <p align="center">
-  <img src="shinobi/assets/logo_light.png" alt="Shinobi.pdf" width="440">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="shinobi/assets/logo_dark.png">
+    <img src="shinobi/assets/logo_light.png" alt="Shinobi.pdf" width="420">
+  </picture>
 </p>
 
-<p align="center"><b>Dividí, unií y convertí tus PDFs sin subirlos a ningún lado.</b><br>
-Una app de escritorio rápida, libre y de código abierto. Tus archivos nunca salen de tu computadora.</p>
+<p align="center">
+  <b>Split, merge and convert your PDFs without uploading them anywhere.</b><br>
+  A fast, free and open-source desktop app for Windows. Your files never leave your computer.
+</p>
 
----
+<p align="center">
+  <a href="https://github.com/MarraTX/ShinobiPDF/releases/latest"><img src="https://img.shields.io/github/v/release/MarraTX/ShinobiPDF?label=version&color=4f55ff" alt="Latest version"></a>
+  <a href="https://github.com/MarraTX/ShinobiPDF/releases"><img src="https://img.shields.io/github/downloads/MarraTX/ShinobiPDF/total?color=4f55ff" alt="Downloads"></a>
+  <img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-4f55ff" alt="Windows 10 | 11">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/MarraTX/ShinobiPDF?color=4f55ff" alt="License"></a>
+</p>
 
-## ✨ Características
+<p align="center">
+  <a href="https://shinobipdf.com/en/"><b>Website</b></a> ·
+  <a href="https://github.com/MarraTX/ShinobiPDF/releases/latest"><b>Download</b></a> ·
+  <a href="README.es.md"><b>Español</b></a>
+</p>
 
-### Dividir
-*   **Cinco formas de dividir:** por capítulos, cada N páginas, por rangos (`1-3, 5, 8-`), por tamaño máximo de archivo (ideal para mail) o **por texto**: un archivo nuevo en cada página que contiene, por ejemplo, «Factura N°», y cada archivo puede tomar su nombre de esa línea.
-*   **Buscar texto en el visor (Ctrl+F):** resalta las coincidencias en la página y las marca en las miniaturas.
-*   **Detección automática de capítulos** desde el índice (marcadores) del PDF.
-*   **Marcado desde el visor:** "Usar como inicio" / "Usar como fin" asignan la página visible al capítulo seleccionado; el fin del capítulo anterior se completa solo.
-*   **Miniaturas con colores:** cada capítulo tiene un color, y se ve de un vistazo qué páginas van a cada archivo.
-*   **Rotar y excluir páginas** antes de exportar.
-*   **Plantillas:** guardá y cargá la configuración como `.json`.
-*   **Opciones de salida:** numerar archivos (`01_`, `02_`...), conservar marcadores y comprimir sin pérdida.
+<p align="center">
+  <img src="docs/screenshot-en.png" alt="Shinobi.pdf splitting a PDF into chapters" width="820">
+</p>
 
-### Otras herramientas
-*   **Unir PDFs** en el orden que elijas, con un marcador por archivo.
-*   **Exportar páginas a imágenes** PNG o JPG en tres calidades.
-*   **Procesar en lote:** aplicá la misma división a muchos PDFs a la vez.
+## Features
 
-### Experiencia
-*   **En español e inglés.** El idioma se elige en el instalador y se puede cambiar desde *Ajustes*.
-*   **PDFs con contraseña:** la app la pide al abrirlos (los archivos generados quedan sin contraseña).
-*   **Clic derecho en el Explorador → "Dividir con Shinobi.pdf"**.
-*   **Arrastrar y soltar**, archivos recientes, **modo claro y oscuro**.
-*   **Interfaz responsiva:** se adapta al tamaño de la ventana y al zoom de Windows (125%, 150%...).
-*   **Atajos de teclado:** ← → para cambiar de página, `Ctrl+F` buscar, `R` rotar, `X` excluir, `Ctrl+O` abrir.
-*   **Aviso de actualizaciones:** la app avisa cuando hay una versión nueva (se puede desactivar en *Ajustes*).
-*   **Tour de bienvenida** la primera vez y **novedades** después de cada actualización.
-*   **Reportar un problema** desde la app: abre un issue con la versión y el registro de errores, sin datos personales.
+*   **Split PDFs five ways:** by chapters, every N pages, by page ranges, by maximum file size or by text (one file per invoice, for example).
+*   **Automatic chapter detection** from the PDF bookmarks, with color-coded thumbnails.
+*   **Merge PDFs** in any order, **export pages to images** and **batch-process** many files at once.
+*   **Search inside the PDF**, rotate and exclude pages before exporting.
+*   **100% offline and private:** no accounts, no ads, no uploads.
+*   English and Spanish, light and dark mode, right-click integration in File Explorer.
 
-## 🚀 Descarga
+## Download
 
-1. Entrá a **[Releases](../../releases/latest)**.
-2. Descargá **`ShinobiPDF-Setup.exe`** (instalador) o **`ShinobiPDF-Portable.zip`** (sin instalación).
-3. El instalador no pide permisos de administrador y te deja elegir el idioma.
+Get **`ShinobiPDF-Setup.exe`** (installer) or **`ShinobiPDF-Portable.zip`** (no installation) from the
+[latest release](https://github.com/MarraTX/ShinobiPDF/releases/latest), or from [shinobipdf.com](https://shinobipdf.com/en/).
+The installer doesn’t require administrator rights.
 
-## 💻 Desarrollo
+## Contributing
 
-```bash
-git clone https://github.com/MarraTX/ShinobiPDF.git
-cd ShinobiPDF
-pip install -r requirements.txt -r requirements-dev.txt
-python shinobi_pdf.py              # o:  python shinobi_pdf.py archivo.pdf
-python -m pytest                   # tests
-```
+Bug reports and ideas are welcome: [open an issue](https://github.com/MarraTX/ShinobiPDF/issues/new),
+or use *Settings → Report a problem* inside the app.
+If you enjoy Shinobi.pdf, you can [support the project](https://shinobipdf.com/en/#donate).
 
-### Compilar
-```bash
-python tools/build_exe.py --zip    # dist/Shinobi/Shinobi.exe y dist/ShinobiPDF-Portable.zip
-python tools/build_installer.py    # dist/ShinobiPDF-Setup.exe (requiere Inno Setup 6)
-```
-Si cambiás el logo o el ícono en `img/`, regenerá los recursos con `python tools/build_assets.py`.
+## Code signing policy
 
-### Publicar una versión
-GitHub Actions corre los tests en cada push. Al crear un tag compila el `.exe` y el instalador, y los sube a Releases:
-```bash
-git tag v1.0
-git push origin v1.0
-```
-Los archivos se publican sin número de versión en el nombre, así la web puede enlazar siempre a
-`https://github.com/MarraTX/ShinobiPDF/releases/latest/download/ShinobiPDF-Setup.exe`.
+Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org).
 
-### Traducciones
-Los textos están en `shinobi/locales/<idioma>.json`. Para sumar un idioma: copiá `en.json`, traducilo y agregalo a `LANGUAGES` en `shinobi/i18n.py`. Los tests verifican que no falte ningún texto.
+*   Committers and reviewers: [MarraTX](https://github.com/MarraTX)
+*   Approvers: [MarraTX](https://github.com/MarraTX)
 
-### Estructura del código
-```
-shinobi_pdf.py           Punto de entrada (acepta archivos como argumento)
-shinobi/
-  core.py                Lógica de PDFs (dividir, unir, lote, búsqueda) sin interfaz
-  i18n.py, locales/      Traducciones
-  app.py                 Ventana principal, barra lateral, tema, contraseñas y tareas en segundo plano
-  split_view.py          Vista "Dividir" (visor, búsqueda, miniaturas, modos, capítulos)
-  tools_views.py         Vistas "Unir", "A imágenes" y "Lote"
-  widgets.py             Componentes reutilizables (botones, diálogos, avisos, miniaturas)
-  settings_dialog.py     Ventanas de ajustes y «Acerca de»
-  onboarding.py          Tour de bienvenida y novedades
-  updates.py             Aviso de actualizaciones (GitHub Releases)
-  logs.py                Registro de errores y reporte de problemas
-  integration.py         Menú contextual del Explorador de Windows
-  theme.py               Colores, tipografías, íconos y logo
-  settings.py            Preferencias del usuario (%APPDATA%\ShinobiPDF)
-  assets/                Logo, ícono y estrella generados desde img/
-installer/               Script de Inno Setup e imágenes del asistente
-tools/                   Scripts para generar recursos, compilar el .exe y el instalador
-tests/                   Tests automáticos
-```
+Every signed release is built by GitHub Actions from the source code in this repository, and each signing request is manually approved.
 
-## 🛠 Tecnologías
-*   **[Python 3](https://www.python.org/)** y **[CustomTkinter](https://github.com/TomSchimansky/CustomTkinter)** para la interfaz.
-*   **[PyMuPDF](https://pymupdf.readthedocs.io/)** para renderizar páginas y buscar texto.
-*   **[pypdf](https://pypdf.readthedocs.io/)** para dividir, unir y escribir los PDFs.
-*   **[PyInstaller](https://pyinstaller.org/)** e **[Inno Setup](https://jrsoftware.org/isinfo.php)** para el ejecutable y el instalador.
+## Privacy policy
 
-## 📄 Licencia
-Shinobi.pdf usa PyMuPDF, que se distribuye bajo **AGPL-3.0**, por lo que el proyecto se publica bajo esa misma licencia (ver `LICENSE`).
+This program will not transfer any information to other networked systems unless specifically requested
+by the user or the person installing or operating it, with this single exception:
+
+*   **Update check:** at most once a day, the app asks the GitHub API (`api.github.com`) for the latest
+    published version. The request only contains the app name and version; no files, file names or
+    personal data are sent. It can be turned off in *Settings*.
+
+*Report a problem* opens a pre-filled GitHub issue in the browser only when the user chooses to, and its
+content can be reviewed before submitting.
+
+## License
+
+Shinobi.pdf is licensed under the [AGPL-3.0](LICENSE), the same license as [PyMuPDF](https://pymupdf.readthedocs.io/), which it uses.
