@@ -9,7 +9,7 @@
 #define AppId "ShinobiPDF"
 #define ExeName "Shinobi.exe"
 #ifndef AppVersion
-  #define AppVersion "1.1"
+  #define AppVersion "1.2"
 #endif
 #ifndef AppPublisher
   #define AppPublisher "Shinobi.pdf"

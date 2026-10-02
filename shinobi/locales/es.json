@@ -329,6 +329,7 @@
   "about_logs": "Carpeta de registros",
   "about_credits": "Hecho con",
 
+  "news_1_2": "• ¿Jugaste a PDF Ninja, el minijuego de shinobipdf.com? En Ajustes → «Acerca de» hay un código secreto que desbloquea una katana exclusiva.",
   "news_1_1": "• El modo Texto ya no muestra un error apenas lo elegís: avisa recién al intentar dividir.\n• La carpeta de destino ya no aparece cortada en la pantalla.\n• Pequeñas mejoras de estabilidad.",
 
   "context_menu_verb": "Dividir con Shinobi.pdf"
