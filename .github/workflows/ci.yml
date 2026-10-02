@@ -28,6 +28,13 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      # Las notas de cada versión se escriben a mano en release-notes/<tag>.md (como v1.0.md).
+      # Si faltan, se frena acá en vez de publicar el changelog automático de GitHub.
+      - name: Verificar que existan las notas de la versión
+        shell: pwsh
+        run: |
+          $notas = "release-notes/${{ github.ref_name }}.md"
+          if (-not (Test-Path $notas)) { Write-Error "Faltan las notas de la versión: creá $notas antes de publicar el tag."; exit 1 }
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
@@ -45,4 +52,4 @@ jobs:
           files: |
             dist/ShinobiPDF-Setup.exe
             dist/ShinobiPDF-Portable.zip
-          generate_release_notes: true
+          body_path: release-notes/${{ github.ref_name }}.md
