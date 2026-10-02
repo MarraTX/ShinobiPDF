@@ -328,5 +328,7 @@
   "about_logs": "Log folder",
   "about_credits": "Built with",
 
+  "news_1_1": "• Text mode no longer shows an error as soon as you pick it: it only warns when you try to split.\n• The destination folder is no longer cut off on screen.\n• Small stability improvements.",
+
   "context_menu_verb": "Split with Shinobi.pdf"
 }
