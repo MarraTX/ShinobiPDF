@@ -532,7 +532,7 @@ class SplitView(ctk.CTkFrame):
 
     def _refresh_path_labels(self):
         """Acorta nombre y ruta según el ancho disponible en el panel."""
-        caracteres = max(16, int((self.left.cget("width") - 190) / 7.5))
+        caracteres = max(16, int((self.left.cget("width") - 190) / 8.2))
         if self.pdf_path:
             self.file_title.configure(text=acortar_texto(os.path.basename(self.pdf_path), caracteres - 4))
         if self.dest_path:
@@ -1073,8 +1073,12 @@ class SplitView(ctk.CTkFrame):
                 self._update_size_preview(spec)
             else:
                 try:
-                    textos = self.get_page_texts() if self.mode == "keyword" else None
-                    self.plan = core.build_plan(spec, self.total_pages, textos_pagina=textos)
+                    if self.mode == "keyword" and not spec["text"]:
+                        # Todavía no se escribió nada: no se muestra un error de entrada
+                        self._previews["keyword"].configure(text="")
+                    else:
+                        textos = self.get_page_texts() if self.mode == "keyword" else None
+                        self.plan = core.build_plan(spec, self.total_pages, textos_pagina=textos)
                 except PlanError as e:
                     self.plan_error = str(e)
         else:
@@ -1228,7 +1232,8 @@ class SplitView(ctk.CTkFrame):
         self.update_plan()
         if self.plan_error or (self.mode != "size" and not self.plan):
             Dialog.alert(self.app, t("check_config"),
-                         self.plan_error or (t("err_add_chapter") if self.mode == "chapters" else t("err_invalid_config")))
+                         self.plan_error or {"chapters": t("err_add_chapter"), "keyword": t("err_keyword_empty")}.get(
+                             self.mode, t("err_invalid_config")))
             return
 
         spec = self.get_spec()
