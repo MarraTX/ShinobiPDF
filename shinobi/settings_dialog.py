@@ -4,7 +4,7 @@ import webbrowser
 
 import customtkinter as ctk
 
-from . import APP_NAME, APP_VERSION, REPO_URL, i18n, integration, logs, theme
+from . import APP_NAME, APP_VERSION, REPO_URL, i18n, integration, logs, theme, updates
 from .i18n import t
 from .theme import C, font
 from .widgets import Dialog, button, center_on_parent, label, make_modal, segmented
@@ -70,26 +70,32 @@ class SettingsDialog(_Ventana):
                command=self._restart).pack(side="left", padx=(10, 0))
         ctk.CTkFrame(body, height=16, fg_color="transparent").pack()
 
-        # Actualizaciones
-        self._section(body, t("settings_updates"))
-        fila = ctk.CTkFrame(body, fg_color="transparent")
-        fila.pack(fill="x", pady=(0, 16))
-        self.var_updates = ctk.BooleanVar(value=bool(app.settings.get("check_updates")))
-        ctk.CTkSwitch(fila, text=t("settings_updates_auto"), variable=self.var_updates, font=font(13),
-                      text_color=C["text"], progress_color=C["accent"],
-                      command=lambda: app.settings.set("check_updates", bool(self.var_updates.get()))).pack(side="left")
-        button(fila, t("settings_updates_now"), "sync", variant="secondary", size="sm",
-               command=self._check_updates).pack(side="right")
+        # Actualizaciones (en la versión de la Store las instala la Store)
+        if updates.enabled():
+            self._section(body, t("settings_updates"))
+            fila = ctk.CTkFrame(body, fg_color="transparent")
+            fila.pack(fill="x", pady=(0, 16))
+            self.var_updates = ctk.BooleanVar(value=bool(app.settings.get("check_updates")))
+            ctk.CTkSwitch(fila, text=t("settings_updates_auto"), variable=self.var_updates, font=font(13),
+                          text_color=C["text"], progress_color=C["accent"],
+                          command=lambda: app.settings.set("check_updates", bool(self.var_updates.get()))).pack(side="left")
+            button(fila, t("settings_updates_now"), "sync", variant="secondary", size="sm",
+                   command=self._check_updates).pack(side="right")
 
         # Integración con el Explorador
         self._section(body, t("settings_windows"))
-        self.var_menu = ctk.BooleanVar(value=integration.is_installed())
-        interruptor = ctk.CTkSwitch(body, text=t("settings_context_menu"), variable=self.var_menu, font=font(13),
-                                    text_color=C["text"], progress_color=C["accent"], command=self._toggle_menu)
-        interruptor.pack(anchor="w")
-        if not integration.available():
-            interruptor.configure(state="disabled")
-        label(body, t("settings_context_menu_hint"), 12, color="muted", anchor="w").pack(fill="x", padx=(48, 0), pady=(2, 16))
+        if integration.from_package():
+            # La declara el manifiesto MSIX: siempre está activa y no se puede apagar desde la app
+            label(body, t("settings_context_menu_store"), 13, anchor="w").pack(fill="x")
+            label(body, t("settings_context_menu_hint"), 12, color="muted", anchor="w").pack(fill="x", pady=(2, 16))
+        else:
+            self.var_menu = ctk.BooleanVar(value=integration.is_installed())
+            interruptor = ctk.CTkSwitch(body, text=t("settings_context_menu"), variable=self.var_menu, font=font(13),
+                                        text_color=C["text"], progress_color=C["accent"], command=self._toggle_menu)
+            interruptor.pack(anchor="w")
+            if not integration.available():
+                interruptor.configure(state="disabled")
+            label(body, t("settings_context_menu_hint"), 12, color="muted", anchor="w").pack(fill="x", padx=(48, 0), pady=(2, 16))
 
         # Archivos recientes
         self._section(body, t("settings_recent"))

@@ -287,6 +287,7 @@
   "settings_restart_now": "Restart now",
   "settings_windows": "Windows integration",
   "settings_context_menu": "Show “Split with Shinobi.pdf” when right-clicking a PDF",
+  "settings_context_menu_store": "“Split with Shinobi.pdf” appears when you right-click a PDF.",
   "settings_context_menu_hint": "On Windows 11 it appears under “Show more options”.",
   "settings_context_menu_done": "Done: right-click any PDF to split it with Shinobi.pdf.",
   "settings_context_menu_error": "Couldn't change the context menu",

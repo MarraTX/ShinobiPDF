@@ -1,0 +1,36 @@
+# Compila el paquete MSIX de Microsoft Store cuando cambia algo del empaquetado, para detectar errores
+# antes de publicar una versión. También se puede correr a mano desde la pestaña Actions.
+# El .msix de cada versión publicada lo genera ci.yml (job release) y queda como artefacto de esa ejecución.
+name: MSIX
+
+on:
+  push:
+    paths:
+      - "installer/msix/**"
+      - "tools/build_msix.py"
+      - "tools/build_exe.py"
+      - ".github/workflows/msix.yml"
+  pull_request:
+    paths:
+      - "installer/msix/**"
+      - "tools/build_msix.py"
+      - "tools/build_exe.py"
+      - ".github/workflows/msix.yml"
+  workflow_dispatch:
+
+jobs:
+  msix:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements.txt -r requirements-dev.txt
+      - run: python tools/build_exe.py
+      - run: python tools/build_msix.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ShinobiPDF-msix
+          path: dist/ShinobiPDF.msix

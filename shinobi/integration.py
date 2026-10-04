@@ -3,11 +3,13 @@ Integración con el Explorador de Windows: opción «Dividir con Shinobi.pdf» e
 
 Se registra en HKEY_CURRENT_USER (solo para el usuario actual, sin permisos de administrador).
 El instalador escribe la misma clave, así que el interruptor de Ajustes y el instalador están sincronizados.
+En la versión de Microsoft Store la opción la declara el manifiesto del paquete (siempre está activa) y no
+se toca el registro: el de un paquete MSIX está virtualizado y el Explorador no lo vería.
 """
 import os
 import sys
 
-from . import APP_ID
+from . import APP_ID, msix
 from .i18n import t
 
 CLAVE_MENU = rf"Software\Classes\SystemFileAssociations\.pdf\shell\{APP_ID}"
@@ -21,7 +23,12 @@ except ImportError:  # No es Windows
 
 
 def available():
-    return winreg is not None
+    return winreg is not None and not msix.is_packaged()
+
+
+def from_package():
+    """True si el menú contextual viene del manifiesto MSIX (versión de la Store)."""
+    return msix.is_packaged()
 
 
 def launch_command():

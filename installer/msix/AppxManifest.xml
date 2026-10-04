@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Manifiesto del paquete MSIX para Microsoft Store. Lo completa tools/build_msix.py:
+  Los marcadores $${...} se reemplazan con installer/msix/store_identity.json y la versión de shinobi/__init__.py.
+  Los ms-resource: son textos traducidos (installer/msix/Strings/<idioma>/Resources.resw).
+-->
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap uap2 uap3 rescap">
+
+  <Identity Name="${identity_name}" Publisher="${publisher}" Version="${version}" ProcessorArchitecture="x64" />
+
+  <Properties>
+    <DisplayName>Shinobi.pdf</DisplayName>
+    <PublisherDisplayName>${publisher_display_name}</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.26100.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="en-us" />
+    <Resource Language="es-es" />
+  </Resources>
+
+  <Applications>
+    <Application Id="ShinobiPDF" Executable="${exe}" EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements
+        DisplayName="Shinobi.pdf"
+        Description="ms-resource:Description"
+        BackgroundColor="transparent"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
+      </uap:VisualElements>
+      <Extensions>
+        <!-- «Dividir con Shinobi.pdf» en el clic derecho de los PDF (equivale a la clave de registro del instalador) -->
+        <uap3:Extension Category="windows.fileTypeAssociation">
+          <uap3:FileTypeAssociation Name="shinobipdf" Parameters="&quot;%1&quot;">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.pdf</uap:FileType>
+            </uap:SupportedFileTypes>
+            <uap2:SupportedVerbs>
+              <uap3:Verb Id="split" Parameters="&quot;%1&quot;">ms-resource:SplitVerb</uap3:Verb>
+            </uap2:SupportedVerbs>
+          </uap3:FileTypeAssociation>
+        </uap3:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <!-- Obligatorio para apps de escritorio clásicas (Win32) empaquetadas -->
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>

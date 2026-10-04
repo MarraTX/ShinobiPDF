@@ -3,7 +3,7 @@ import urllib.parse
 
 import pytest
 
-from shinobi import logs, updates
+from shinobi import integration, logs, msix, updates
 
 
 @pytest.mark.parametrize("remota, local, esperado", [
@@ -27,3 +27,22 @@ def test_reporte_oculta_el_usuario_y_respeta_el_largo(monkeypatch):
     cuerpo = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)["body"][0]
     assert os.path.basename(casa) not in cuerpo
     assert "~" in cuerpo
+
+
+def test_version_de_la_store_no_busca_actualizaciones_ni_toca_el_registro(monkeypatch):
+    monkeypatch.setattr(msix, "is_packaged", lambda: True)
+
+    class AppQueNoDebeUsarse:
+        def __getattr__(self, nombre):
+            raise AssertionError(f"No debería usar app.{nombre}")
+
+    assert not updates.enabled()
+    updates.check_in_background(AppQueNoDebeUsarse(), manual=True)
+    assert not integration.available()
+    assert not integration.is_installed()
+    assert integration.from_package()
+
+
+def test_fuera_de_la_store_no_hay_paquete():
+    # Los tests nunca corren empaquetados: ni en Linux ni con el Python normal de Windows
+    assert msix.is_packaged() is False

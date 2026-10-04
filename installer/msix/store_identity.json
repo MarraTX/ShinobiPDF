@@ -1,0 +1,6 @@
+{
+  "_comentario": "Copiá estos tres valores de Partner Center > tu app > Identidad del producto (Product identity). Mientras tengan los valores de ejemplo, el .msix sirve para probar en tu PC pero la Store lo rechaza.",
+  "identity_name": "ShinobiPDF.Dev",
+  "publisher": "CN=ShinobiPDF-Dev",
+  "publisher_display_name": "Shinobi.pdf"
+}
